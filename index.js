@@ -12,13 +12,14 @@ var options = {
 
 //http & socket port
 var server = http.createServer(options);
-server.listen(4040);
+const port = process.env.PORT || 3000;
+server.listen(port);
 var io = socketio(server);
 console.log("Server socket 4040 , api 4000");
 
 //api port
 var app = require("express")();
-var port = 4000;
+// var port = 4000;
 app.listen(port, function () {
   console.log("API listening on *:" + port);
 });
