@@ -1,28 +1,37 @@
 // var fs = require('fs')
 // var https = require('https')
 // 如果不需要用 https 的話，要改成引用 http 喔
-var http = require("http");
-var socketio = require("socket.io");
+const express = require("express");
+const app = express();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
+const port = process.env.PORT || 3000;
+const path = require("path");
+// var http = require("http");
+// var socketio = require("socket.io");
 
 //https 的一些設定，如果不需要使用 ssl 加密連線的話，把內容註解掉就好
 var options = {
   // key: fs.readFileSync('這個網域的 ssl key 位置'),
   // cert: fs.readFileSync('這個網域的 ssl fullchain 位置')
 };
-
-//http & socket port
-var server = http.createServer(options);
-const port = process.env.PORT || 3000;
-server.listen(port);
-var io = socketio(server);
-console.log("Server socket 4040 , api 4000");
+http.listen(port, () => {
+  // eslint-disable-next-line no-console
+  console.log("Example app listening on http://localhost:3000");
+});
+// //http & socket port
+// var server = http.createServer(options);
+app.use(express.static(path.join(__dirname, "public")));
+// server.listen(port);
+// var io = socketio(server);
+// console.log("Server socket 4040 , api 4000");
 
 //api port
-var app = require("express")();
+// var app = require("express")();
 // var port = 4000;
-app.listen(port, function () {
-  console.log("API listening on *:" + port);
-});
+// app.listen(port, function () {
+//   console.log("API listening on *:" + port);
+// });
 
 //用 api 方式取得
 app.get("/api/messages", function (req, res) {
