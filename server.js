@@ -1,13 +1,14 @@
 //import express 和 ws 套件
 const express = require("express");
 const SocketServer = require("ws").Server;
-
+const http = require("http");
 //指定開啟的 port
-const PORT = 3000;
+const hostname = "127.0.0.1";
+const port = 3000;
 
 //創建 express 的物件，並綁定及監聽 3000 port ，且設定開啟後在 console 中提示
 const server = express().listen(PORT, () =>
-  console.log(`Listening on ${PORT}`)
+  console.log(`Listening on ${hostname} :${PORT}`)
 );
 
 //將 express 交給 SocketServer 開啟 WebSocket 的服務
