@@ -3,6 +3,8 @@
 // 如果不需要用 https 的話，要改成引用 http 喔
 var http = require("http");
 var socketio = require("socket.io");
+const PORT = process.env.PORT || 3000;
+const INDEX = "/index.html";
 
 //https 的一些設定，如果不需要使用 ssl 加密連線的話，把內容註解掉就好
 var options = {
@@ -18,7 +20,7 @@ console.log("Server socket 4040 , api 4000");
 
 //api port
 var app = require("express")();
-var port = 4000;
+var port = rocess.env.PORT || 4000;
 app.listen(port, function () {
   console.log("API listening on *:" + port);
 });
